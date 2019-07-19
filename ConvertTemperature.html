@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Convert Temperatures</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <script>
+        "use strict";
+        var $ = function(id) { return document.getElementById(id);};
+
+        
+
+        var swap = function() {
+            var entry = parseFloat($("degrees").value);
+            $("degrees").value = entry;
+            convert();
+    
+        };
+        
+        function convertToCelcius(){
+            $("label_one").innerHTML = "Enter F degrees";
+            $("label_two").innerHTML = "Degrees Celcius:";
+            
+            swap();
+        }
+        
+        function convertToFahrenheit(){
+            $("label_one").innerHTML = "Enter C degrees";
+            $("label_two").innerHTML = "Degrees Fahrenheit:";
+            
+            swap();
+        }
+
+        function convert(){
+            var entry = parseFloat($("degrees").value);
+            if(isNaN(entry)){
+                alert("You must enter a valid number for degrees");
+            }else{
+                if($("toCelcius").checked){
+                    $("result").value = (entry-32)*5/9;
+                }else{
+                    $("result").value = (entry*9/5)+32;
+                }
+            }
+        }
+
+        window.onload = function(){
+            $("convertTemperature").onclick=convert;
+            $("toCelcius").onclick=convertToCelcius;
+
+            $("toFahrenheit").onclick=convertToFahrenheit;
+            $("degrees").focus();
+        }
+
+    </script>
+</head>
+
+<body>
+    <main>
+        <h1>Convert temperatures</h1>
+        <input type="radio" name="conversion" id="toCelcius" checked>Fahrenheit to Celcius<br>
+        <input type="radio" name="conversion" id="toFahrenheit">Celcius to Fahrenheit<br><br>
+        <label id="label_one">Enter F degrees: </label>
+        <input type="text" id="degrees"><br>
+        <label id="label_two">Degrees Celcius: </label>
+        <input type="text" id="result" disabled><br>
+        <label><br></label>
+        <input type="button" id="convertTemperature" value="Convert"><br>
+    </main>
+</body>
+
+</html>
